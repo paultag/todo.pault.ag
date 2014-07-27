@@ -31,10 +31,15 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'public.urls'
 WSGI_APPLICATION = 'public.wsgi.application'
 
+
+TEMPLATE_DIRS = (
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates')),
+)
+
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get(
         'DATABASE_URL',
-        'postgis://recdep:recdep@localhost/recdep'
+        'postgres://todo:todo@localhost/todo'
     ))
 }
 

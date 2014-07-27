@@ -7,6 +7,13 @@ class Number(models.Model):  # Phone Number
     who = models.ForeignKey(User, related_name='numbers')
 
 
+class Priority(models.Model):
+    name = models.CharField(max_length=16)
+    description = models.TextField()
+    weight = models.IntegerField()
+    critical = models.BooleanField(default=False)
+
+
 class Item(models.Model):
     who = models.ForeignKey(User, related_name='agenda_items')
     created_at = models.DateTimeField(auto_now=True)
@@ -14,13 +21,7 @@ class Item(models.Model):
     finished_at = models.DateTimeField(null=True)
     due_date = models.DateTimeField(null=True)
     description = models.TextField()
-    priority = models.ForeignKey(User, related_name='items')
-
-
-class Priority(models.Model):
-    description = models.TextField()
-    weight = models.IntegerField()
-    critical = models.BooleanField(default=False)
+    priority = models.ForeignKey(Priority, related_name='items')
 
 
 class Depedency(models.Model):

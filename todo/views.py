@@ -1,4 +1,4 @@
-from todo.models import Number, Item
+from todo.models import Number, Item, Priority
 
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
@@ -26,8 +26,11 @@ def text(request):
     item = Item.objects.create(
         who=number.who,
         description=body,
+        priority=Priority.objects.get(name='default'),
     )
+    item.save()
 
     return render(request, 'todo/text.xml', {
         "who": who,
+        "item": item,
     })
